@@ -262,6 +262,7 @@ exports[`Render App 1`] = `
       >
         <button
           className="catalog__button"
+          onClick={[Function]}
           type="button"
         >
           Show more

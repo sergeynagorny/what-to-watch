@@ -8,6 +8,7 @@ it(`Should MainPage render correctly`, () => {
     .create(
         <MainPage
           movieTitles={[]}
+          onShowMoreButtonClick={() => {}}
         />
     )
     .toJSON();

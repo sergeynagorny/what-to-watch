@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 
 const MainPage = (props) => {
-  const {movieTitles} = props;
+  const {movieTitles, onShowMoreButtonClick} = props;
 
   return (
     <section>
@@ -120,7 +120,13 @@ const MainPage = (props) => {
           </div>
 
           <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
+            <button
+              className="catalog__button"
+              type="button"
+              onClick={onShowMoreButtonClick}
+            >
+              Show more
+            </button>
           </div>
         </section>
 
@@ -145,6 +151,7 @@ const MainPage = (props) => {
 
 MainPage.propTypes = {
   movieTitles: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onShowMoreButtonClick: PropTypes.func.isRequired,
 };
 
 export default MainPage;

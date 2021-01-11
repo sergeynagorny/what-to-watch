@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-
+import MoviesList from "../movies-list/movies-list";
 
 const MainPage = (props) => {
-  const {movieTitles, onShowMoreButtonClick} = props;
+  const {films, onShowMoreButtonClick} = props;
 
   return (
     <section>
@@ -101,23 +101,9 @@ const MainPage = (props) => {
             </li>
           </ul>
 
-          <div className="catalog__movies-list">
-
-            {movieTitles.map((it, i) => {
-              return (
-                <article key={`smallMovieCard` + i} className="small-movie-card catalog__movies-card">
-                  <div className="small-movie-card__image">
-                    <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-                      alt={it} width="280" height="175" />
-                  </div>
-                  <h3 className="small-movie-card__title">
-                    <a className="small-movie-card__link" href="movie-page.html">{it}</a>
-                  </h3>
-                </article>
-              );
-            })}
-
-          </div>
+          <MoviesList
+            films={films}
+          />
 
           <div className="catalog__more">
             <button
@@ -150,7 +136,7 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  movieTitles: PropTypes.arrayOf(PropTypes.string).isRequired,
+  films: PropTypes.array.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
 };
 

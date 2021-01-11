@@ -3,21 +3,21 @@ import PropTypes from "prop-types";
 import MainPage from "../main-page/main-page";
 
 
-const showMoreButtonHandler = () => { };
+const showMoreButtonClickHandler = () => { };
 
 const App = (props) => {
-  const {movieTitles} = props;
+  const {films} = props;
 
   return (
     <MainPage
-      movieTitles={movieTitles}
-      onShowMoreButtonClick={showMoreButtonHandler}
+      films={films}
+      onShowMoreButtonClick={showMoreButtonClickHandler}
     />
   );
 };
 
 App.propTypes = {
-  movieTitles: PropTypes.arrayOf(PropTypes.string).isRequired,
+  films: PropTypes.array.isRequired,
 };
 
 export default App;

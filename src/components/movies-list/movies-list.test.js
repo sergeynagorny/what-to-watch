@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
+import MoviesList from "./movies-list.jsx";
 
 
 const films = [
@@ -14,9 +14,9 @@ const films = [
   }
 ];
 
-it(`Should App render correctly`, () => {
+it(`Should MoviesList render correctly`, () => {
   const tree = renderer.create(
-      <App
+      <MoviesList
         films={films}
       />
   ).toJSON();

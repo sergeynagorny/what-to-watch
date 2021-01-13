@@ -1,21 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-
 const MovieCard = (props) => {
-  const {film, onMovieCardHover} = props;
-  const {title, poster} = film;
+  const {film, onMovieCardMouseLeave, onMovieCardMouseEnter, renderPlayer} = props;
+  const {id, title} = film;
 
   return (
     <article className="small-movie-card catalog__movies-card"
       onMouseEnter={() => {
-        onMovieCardHover(film);
+        onMovieCardMouseEnter(id);
+      }}
+      onMouseLeave={() => {
+        onMovieCardMouseLeave();
       }}>
       <div className="small-movie-card__image">
-        <img width="280" height="175"
-          src={poster}
-          alt={title}
-        />
+        {renderPlayer()}
       </div>
       <h3 className="small-movie-card__title">
         <a className="small-movie-card__link" href="movie-page.html">{title}</a>
@@ -26,10 +25,12 @@ const MovieCard = (props) => {
 
 MovieCard.propTypes = {
   film: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired,
   }).isRequired,
-  onMovieCardHover: PropTypes.func.isRequired,
+  onMovieCardMouseLeave: PropTypes.func.isRequired,
+  onMovieCardMouseEnter: PropTypes.func.isRequired,
+  renderPlayer: PropTypes.func.isRequired,
 };
 
 export default MovieCard;

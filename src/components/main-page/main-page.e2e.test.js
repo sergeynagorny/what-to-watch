@@ -10,22 +10,27 @@ Enzyme.configure({
 
 const films = [
   {
+    id: 1,
     title: `What We Do in the Shadows`,
     poster: `img/what-we-do-in-the-shadows.jpg`,
   },
   {
+    id: 2,
     title: `Pulp Fiction`,
     poster: `img/pulp-fiction.jpg`,
   },
   {
+    id: 3,
     title: `No Country for Old Men`,
     poster: `img/no-country-for-old-men.jpg`,
   },
   {
+    id: 4,
     title: `Moonrise Kingdom`,
     poster: `img/moonrise-kingdom.jpg`,
   },
   {
+    id: 5,
     title: `Orlando`,
     poster: `img/orlando.jpg`,
   },

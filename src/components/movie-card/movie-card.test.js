@@ -4,6 +4,7 @@ import MovieCard from "./movie-card.jsx";
 
 
 const film = {
+  id: 1,
   title: `What We Do in the Shadows`,
   poster: `img/what-we-do-in-the-shadows.jpg`,
 };
@@ -12,7 +13,9 @@ it(`Should MovieCard render correctly`, () => {
   const tree = renderer.create(
       <MovieCard
         film={film}
-        onMovieCardHover={() => {}}
+        onMovieCardMouseEnter={() => {}}
+        onMovieCardMouseLeave={() => {}}
+        renderPlayer={() => {}}
       />
   ).toJSON();
 

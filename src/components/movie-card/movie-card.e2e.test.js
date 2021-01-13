@@ -9,6 +9,7 @@ configure({
 });
 
 const film = {
+  id: 1,
   title: `What We Do in the Shadows`,
   poster: `img/what-we-do-in-the-shadows.jpg`,
 };
@@ -19,12 +20,14 @@ it(`When hovering card passed to callback is consistent with "activeFilm" MovieL
   const movieCard = shallow(
       <MovieCard
         film={film}
-        onMovieCardHover={onMovieCardHover}
+        onMovieCardMouseEnter={onMovieCardHover}
+        onMovieCardMouseLeave={() => { }}
+        renderPlayer={() => { }}
       />
   );
 
   movieCard.simulate(`mouseenter`);
 
   expect(onMovieCardHover).toHaveBeenCalledTimes(1);
-  expect(onMovieCardHover).toHaveBeenCalledWith(film);
+  expect(onMovieCardHover).toHaveBeenCalledWith(film.id);
 });

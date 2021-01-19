@@ -1,20 +1,58 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import MainPage from "../main-page/main-page";
+import {Switch, Route, BrowserRouter} from "react-router-dom";
+import MovieCard from "../movie-card/movie-card";
+import Catalog from "../catalog/catalog.jsx";
+import {MovieCardType} from "../../const.js";
 
+import films from "../../mocks/films.js";
+import filmDetails from "../../mocks/film-details.js";
+import filmReviews from "../../mocks/film-reviews.js";
 
 const showMoreButtonClickHandler = () => { };
 
-const App = (props) => {
-  const {films} = props;
+class App extends PureComponent {
+  constructor(props) {
+    super(props);
+  }
 
-  return (
-    <MainPage
-      films={films}
-      onShowMoreButtonClick={showMoreButtonClickHandler}
-    />
-  );
-};
+  render() {
+    return (
+      <BrowserRouter>
+        <Switch>
+
+          <Route exact path="/">
+            <MovieCard
+              type={MovieCardType.PREVIEW}
+              film={filmDetails}
+              onShowMoreButtonClick={showMoreButtonClickHandler}
+            />
+            <Catalog films={films} />
+          </Route>
+
+          <Route exact path="/movie-page">
+            <MovieCard
+              type={MovieCardType.FULL}
+              film={filmDetails}
+              reviews={filmReviews}
+              onShowMoreButtonClick={showMoreButtonClickHandler}
+            />
+            <Catalog films={films} />
+          </Route>
+
+          <Route exact path="/movie-page/details">
+
+          </Route>
+
+          <Route exact path="/movie-page/reviews">
+
+          </Route>
+
+        </Switch>
+      </BrowserRouter>
+    );
+  }
+}
 
 App.propTypes = {
   films: PropTypes.array.isRequired,

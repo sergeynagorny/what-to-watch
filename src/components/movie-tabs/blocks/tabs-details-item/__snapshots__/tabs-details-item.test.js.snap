@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should TabsDetailsItem render correctly 1`] = `
+<p
+  className="movie-card__details-item"
+>
+  <strong
+    className="movie-card__details-name"
+  >
+    name
+  </strong>
+  <span
+    className="movie-card__details-value"
+    style={
+      Object {
+        "whiteSpace": "pre-line",
+      }
+    }
+  >
+    children
+  </span>
+</p>
+`;

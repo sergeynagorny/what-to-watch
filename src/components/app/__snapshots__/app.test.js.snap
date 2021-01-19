@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Should App render correctly 1`] = `
-<section>
+Array [
   <section
     className="movie-card"
   >
@@ -66,7 +66,7 @@ exports[`Should App render correctly 1`] = `
         className="movie-card__info"
       >
         <div
-          className="movie-card__poster"
+          className="movie-card__poster movie-card__poster--big"
         >
           <img
             alt="The Grand Budapest Hotel poster"
@@ -89,7 +89,7 @@ exports[`Should App render correctly 1`] = `
             <span
               className="movie-card__genre"
             >
-              Drama
+              Comedy
             </span>
             <span
               className="movie-card__year"
@@ -122,8 +122,8 @@ exports[`Should App render correctly 1`] = `
               type="button"
             >
               <svg
-                height="20"
-                viewBox="0 0 19 20"
+                height="19"
+                viewBox="0 0 19 19"
                 width="19"
               >
                 <use
@@ -134,11 +134,19 @@ exports[`Should App render correctly 1`] = `
                 My list
               </span>
             </button>
+            <button
+              className="btn btn--list movie-card__button"
+              type="button"
+            >
+              <span>
+                Add review
+              </span>
+            </button>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </section>,
   <div
     className="page-content"
   >
@@ -154,11 +162,12 @@ exports[`Should App render correctly 1`] = `
         className="catalog__genres-list"
       >
         <li
-          className="catalog__genres-item catalog__genres-item--active"
+          className="catalog__genres-item"
         >
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[Function]}
           >
             All genres
           </a>
@@ -169,6 +178,7 @@ exports[`Should App render correctly 1`] = `
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[Function]}
           >
             Comedies
           </a>
@@ -179,6 +189,7 @@ exports[`Should App render correctly 1`] = `
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[Function]}
           >
             Crime
           </a>
@@ -189,6 +200,7 @@ exports[`Should App render correctly 1`] = `
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[Function]}
           >
             Documentary
           </a>
@@ -199,6 +211,7 @@ exports[`Should App render correctly 1`] = `
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[Function]}
           >
             Dramas
           </a>
@@ -209,6 +222,7 @@ exports[`Should App render correctly 1`] = `
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[Function]}
           >
             Horror
           </a>
@@ -219,8 +233,9 @@ exports[`Should App render correctly 1`] = `
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[Function]}
           >
-            Kids & Family
+            Kids &amp; Family
           </a>
         </li>
         <li
@@ -229,6 +244,7 @@ exports[`Should App render correctly 1`] = `
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[Function]}
           >
             Romance
           </a>
@@ -239,6 +255,7 @@ exports[`Should App render correctly 1`] = `
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[Function]}
           >
             Sci-Fi
           </a>
@@ -249,6 +266,7 @@ exports[`Should App render correctly 1`] = `
           <a
             className="catalog__genres-link"
             href="#"
+            onClick={[Function]}
           >
             Thrillers
           </a>
@@ -270,7 +288,9 @@ exports[`Should App render correctly 1`] = `
               poster="img/what-we-do-in-the-shadows.jpg"
               width="280"
             >
-              <source />
+              <source
+                src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+              />
             </video>
           </div>
           <h3
@@ -297,7 +317,9 @@ exports[`Should App render correctly 1`] = `
               poster="img/pulp-fiction.jpg"
               width="280"
             >
-              <source />
+              <source
+                src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+              />
             </video>
           </div>
           <h3
@@ -311,13 +333,70 @@ exports[`Should App render correctly 1`] = `
             </a>
           </h3>
         </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+          >
+            <video
+              height="175"
+              poster="img/no-country-for-old-men.jpg"
+              width="280"
+            >
+              <source
+                src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+              />
+            </video>
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="movie-page.html"
+            >
+              No Country for Old Men
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+          >
+            <video
+              height="175"
+              poster="img/moonrise-kingdom.jpg"
+              width="280"
+            >
+              <source
+                src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+              />
+            </video>
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="movie-page.html"
+            >
+              Moonrise Kingdom
+            </a>
+          </h3>
+        </article>
       </div>
       <div
         className="catalog__more"
       >
         <button
           className="catalog__button"
-          onClick={[Function]}
           type="button"
         >
           Show more
@@ -358,6 +437,6 @@ exports[`Should App render correctly 1`] = `
         </p>
       </div>
     </footer>
-  </div>
-</section>
+  </div>,
+]
 `;

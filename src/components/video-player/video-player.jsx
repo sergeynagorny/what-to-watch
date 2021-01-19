@@ -1,6 +1,7 @@
 import React, {forwardRef} from "react";
 import PropTypes from "prop-types";
 
+
 const VideoPlayer = forwardRef((props, ref) => {
   const {film} = props;
   const {trailer, poster} = film;
@@ -20,4 +21,5 @@ VideoPlayer.propTypes = {
 };
 
 export default VideoPlayer;
+
 VideoPlayer.displayName = `VideoPlayer`;

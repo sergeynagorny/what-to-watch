@@ -12,3 +12,7 @@ export const convertMinutesToDuration = (n) => {
 
   return `${rhours}${rminutes}`;
 };
+
+export const extend = (a, b) => {
+  return Object.assign({}, a, b);
+};

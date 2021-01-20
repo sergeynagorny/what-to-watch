@@ -3,17 +3,36 @@ import PropTypes from "prop-types";
 import CatalogGenres from "../catalog-genres/catalog-genres.jsx";
 import CatalogList from "../catalog-list/catalog-list.jsx";
 
+const _renderCatalogButton = (onCatalogButtonClick) => {
+  return (
+    <div className="catalog__more">
+      <button className="catalog__button" type="button"
+        onClick={() => {
+          onCatalogButtonClick();
+        }}
+      >
+        Show more
+      </button>
+    </div>
+  );
+};
+
 const Catalog = (props) => {
-  const {films} = props;
+  const {films, count, allGenres, activeGenre, onCatalogGenresButtonClick, onCatalogButtonClick} = props;
+
+  const filmsShown = films.slice(0, count);
+
   return (
     <div className="page-content">
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-        <CatalogGenres />
-        <CatalogList films={films} />
-        <div className="catalog__more">
-          <button className="catalog__button" type="button">Show more</button>
-        </div>
+        <CatalogGenres
+          onCatalogGenresButtonClick={onCatalogGenresButtonClick}
+          activeGenre={activeGenre}
+          allGenres={allGenres}
+        />
+        <CatalogList films={filmsShown} />
+        {count <= films.length ? _renderCatalogButton(onCatalogButtonClick) : ``}
       </section>
       <footer className="page-footer">
         <div className="logo">
@@ -33,7 +52,7 @@ const Catalog = (props) => {
 };
 
 Catalog.propTypes = {
-  films: PropTypes.array.isRequired,
+  // films: PropTypes.array.isRequired,
 };
 
 export default Catalog;

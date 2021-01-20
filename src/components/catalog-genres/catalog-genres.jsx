@@ -1,23 +1,29 @@
 import React from "react";
-import {GenresList} from "../../const.js";
 
 
-// const ACTIVE_ITEM_CLASS = `catalog__genres-item--active`;
+const ACTIVE_ITEM_CLASS = `catalog__genres-item--active`;
 
-const CatalogGenres = () => {
+const CatalogGenres = (props) => {
+  const {activeGenre, allGenres, onCatalogGenresButtonClick} = props;
+
   return (
     <ul className="catalog__genres-list">
-      {Object.values(GenresList).map((genre) =>
-        <li key={genre} className="catalog__genres-item">
-          <a href="#" className="catalog__genres-link"
-            onClick={(evt) => {
-              evt.preventDefault();
-            }}
-          >
-            {genre}
-          </a>
-        </li>
-      )}
+      {allGenres.map((genre) => {
+        const activeClass = genre === activeGenre ? `${ACTIVE_ITEM_CLASS}` : ``;
+
+        return (
+          <li key={genre} className={`catalog__genres-item ${activeClass}`}>
+            <a href="#" className="catalog__genres-link"
+              onClick={(evt) => {
+                evt.preventDefault();
+                onCatalogGenresButtonClick(genre);
+              }}
+            >
+              {genre}
+            </a>
+          </li>
+        );
+      })}
     </ul>
   );
 };

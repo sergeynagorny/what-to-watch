@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import CatalogGenres from "../catalog-genres/catalog-genres.jsx";
 import CatalogList from "../catalog-list/catalog-list.jsx";
+import AppFooter from "../app-footer/app-footer.jsx";
 
 const _renderCatalogButton = (onCatalogButtonClick) => {
   return (
@@ -18,41 +19,49 @@ const _renderCatalogButton = (onCatalogButtonClick) => {
 };
 
 const Catalog = (props) => {
-  const {films, count, allGenres, activeGenre, onCatalogGenresButtonClick, onCatalogButtonClick} = props;
+
+  const {
+    films,
+    count,
+    allGenres,
+    activeGenre,
+    onCatalogButtonClick,
+    onCatalogGenresButtonClick,
+  } = props;
 
   const filmsShown = films.slice(0, count);
+  const isCatalogButtonShowing = count <= films.length;
 
   return (
     <div className="page-content">
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-        <CatalogGenres
-          onCatalogGenresButtonClick={onCatalogGenresButtonClick}
-          activeGenre={activeGenre}
-          allGenres={allGenres}
-        />
-        <CatalogList films={filmsShown} />
-        {count <= films.length ? _renderCatalogButton(onCatalogButtonClick) : ``}
-      </section>
-      <footer className="page-footer">
-        <div className="logo">
-          <a className="logo__link logo__link--light">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
-    </div>
 
+        <CatalogGenres
+          allGenres={allGenres}
+          activeGenre={activeGenre}
+          onCatalogGenresButtonClick={onCatalogGenresButtonClick}
+        />
+
+        <CatalogList films={filmsShown} />
+
+        {isCatalogButtonShowing ? _renderCatalogButton(onCatalogButtonClick) : ``}
+
+      </section>
+
+      <AppFooter />
+
+    </div>
   );
 };
 
 Catalog.propTypes = {
-  // films: PropTypes.array.isRequired,
+  films: PropTypes.array.isRequired,
+  count: PropTypes.number.isRequired,
+  allGenres: PropTypes.array.isRequired,
+  activeGenre: PropTypes.string.isRequired,
+  onCatalogButtonClick: PropTypes.func.isRequired,
+  onCatalogGenresButtonClick: PropTypes.func.isRequired,
 };
 
 export default Catalog;

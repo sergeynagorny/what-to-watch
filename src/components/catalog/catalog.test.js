@@ -20,6 +20,11 @@ it(`Should Catalog render correctly`, () => {
   const tree = renderer.create(
       <Catalog
         films={films}
+        count={2}
+        allGenres={[`Comedy`]}
+        activeGenre={`Comedy`}
+        onCatalogButtonClick={() => {}}
+        onCatalogGenresButtonClick={() => {}}
       />
   ).toJSON();
 

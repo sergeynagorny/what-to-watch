@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
+import {App} from "./app.jsx";
 
 
 const films = [
@@ -20,6 +20,12 @@ it(`Should App render correctly`, () => {
   const tree = renderer.create(
       <App
         films={films}
+        filmsShownCount={2}
+        filmsByGenre={films}
+        allGenres={[`Comedy`]}
+        activeGenre={`Comedy`}
+        onCatalogButtonClick={() => {}}
+        onCatalogGenresButtonClick={() => {}}
       />
   ).toJSON();
 

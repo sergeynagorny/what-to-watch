@@ -15,7 +15,15 @@ const showMoreButtonClickHandler = () => { };
 
 class App extends PureComponent {
   render() {
-    const {films, filmsShownCount, filmsByGenre, allGenres, activeGenre, onCatalogGenresButtonClick, onCatalogButtonClick} = this.props;
+
+    const {
+      filmsShownCount,
+      filmsByGenre,
+      allGenres,
+      activeGenre,
+      onCatalogButtonClick,
+      onCatalogGenresButtonClick,
+    } = this.props;
 
     return (
       <BrowserRouter>
@@ -28,12 +36,12 @@ class App extends PureComponent {
               onShowMoreButtonClick={showMoreButtonClickHandler}
             />
             <Catalog
-              onCatalogGenresButtonClick={onCatalogGenresButtonClick}
-              onCatalogButtonClick={onCatalogButtonClick}
-              activeGenre={activeGenre}
               films={filmsByGenre}
-              allGenres={allGenres}
               count={filmsShownCount}
+              allGenres={allGenres}
+              activeGenre={activeGenre}
+              onCatalogButtonClick={onCatalogButtonClick}
+              onCatalogGenresButtonClick={onCatalogGenresButtonClick}
             />
           </Route>
 
@@ -45,12 +53,12 @@ class App extends PureComponent {
               onShowMoreButtonClick={showMoreButtonClickHandler}
             />
             <Catalog
-              onCatalogGenresButtonClick={onCatalogGenresButtonClick}
-              onCatalogButtonClick={onCatalogButtonClick}
-              activeGenre={activeGenre}
               films={filmsByGenre}
-              allGenres={allGenres}
               count={filmsShownCount}
+              allGenres={allGenres}
+              activeGenre={activeGenre}
+              onCatalogButtonClick={onCatalogButtonClick}
+              onCatalogGenresButtonClick={onCatalogGenresButtonClick}
             />
           </Route>
 
@@ -70,14 +78,20 @@ class App extends PureComponent {
 
 App.propTypes = {
   films: PropTypes.array.isRequired,
+  filmsShownCount: PropTypes.number.isRequired,
+  filmsByGenre: PropTypes.array.isRequired,
+  allGenres: PropTypes.array.isRequired,
+  activeGenre: PropTypes.string.isRequired,
+  onCatalogButtonClick: PropTypes.func.isRequired,
+  onCatalogGenresButtonClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  activeGenre: state.activeGenre,
   films: state.films,
-  allGenres: state.allGenres,
   filmsByGenre: state.filmsByGenre,
   filmsShownCount: state.filmsShownCount,
+  allGenres: state.allGenres,
+  activeGenre: state.activeGenre,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -92,4 +106,5 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {App};
+
 export default connect(mapStateToProps, mapDispatchToProps)(App);

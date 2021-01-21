@@ -5,7 +5,11 @@ import CatalogGenres from "./catalog-genres.jsx";
 
 it(`Should CatalogGenres render correctly`, () => {
   const tree = renderer.create(
-      <CatalogGenres/>
+      <CatalogGenres
+        allGenres={[`Comedy`]}
+        activeGenre={`Comedy`}
+        onCatalogGenresButtonClick={() => { }}
+      />
   ).toJSON();
 
   expect(tree).toMatchSnapshot();

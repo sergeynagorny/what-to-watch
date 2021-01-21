@@ -1,10 +1,16 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 
 const ACTIVE_ITEM_CLASS = `catalog__genres-item--active`;
 
 const CatalogGenres = (props) => {
-  const {activeGenre, allGenres, onCatalogGenresButtonClick} = props;
+
+  const {
+    allGenres,
+    activeGenre,
+    onCatalogGenresButtonClick
+  } = props;
 
   return (
     <ul className="catalog__genres-list">
@@ -26,6 +32,12 @@ const CatalogGenres = (props) => {
       })}
     </ul>
   );
+};
+
+CatalogGenres.propTypes = {
+  allGenres: PropTypes.array.isRequired,
+  activeGenre: PropTypes.string.isRequired,
+  onCatalogGenresButtonClick: PropTypes.func.isRequired,
 };
 
 export default CatalogGenres;

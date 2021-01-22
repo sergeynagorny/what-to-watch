@@ -10,8 +10,8 @@ const VideoPlayer = forwardRef((props, ref) => {
     <video
       width="280" height="175"
       poster={poster}
-      ref={ref}>
-      <source src={trailer} />
+      ref={ref}
+      src={trailer}>
     </video>
   );
 });

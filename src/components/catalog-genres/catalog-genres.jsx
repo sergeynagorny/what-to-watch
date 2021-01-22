@@ -5,24 +5,23 @@ import PropTypes from "prop-types";
 const ACTIVE_ITEM_CLASS = `catalog__genres-item--active`;
 
 const CatalogGenres = (props) => {
-
   const {
     allGenres,
-    activeGenre,
-    onCatalogGenresButtonClick
+    activeItem,
+    itemClickHandler
   } = props;
 
   return (
     <ul className="catalog__genres-list">
       {allGenres.map((genre) => {
-        const activeClass = genre === activeGenre ? `${ACTIVE_ITEM_CLASS}` : ``;
+        const activeClass = genre === activeItem ? `${ACTIVE_ITEM_CLASS}` : ``;
 
         return (
           <li key={genre} className={`catalog__genres-item ${activeClass}`}>
             <a href="#" className="catalog__genres-link"
               onClick={(evt) => {
                 evt.preventDefault();
-                onCatalogGenresButtonClick(genre);
+                itemClickHandler(genre);
               }}
             >
               {genre}
@@ -36,8 +35,8 @@ const CatalogGenres = (props) => {
 
 CatalogGenres.propTypes = {
   allGenres: PropTypes.array.isRequired,
-  activeGenre: PropTypes.string.isRequired,
-  onCatalogGenresButtonClick: PropTypes.func.isRequired,
+  activeItem: PropTypes.string.isRequired,
+  itemClickHandler: PropTypes.func.isRequired,
 };
 
 export default CatalogGenres;

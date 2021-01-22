@@ -4,10 +4,15 @@ import MovieCardHeader from "../movie-card-header/movie-card-header";
 import AppHeader from "../app-header/app-header";
 import MovieTabs from "../movie-tabs/movie-tabs";
 import {MovieCardType} from "../../const.js";
+import {MovieTab} from "../../const.js";
 
+
+import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
+const MovieTabsWrapper = withActiveItem(MovieTabs);
+// import withActiveTab from "../../hocs/with-active-tab/with-active-tab.js";
+// const MovieTabsWrapped = withActiveTab(MovieTabs);
 
 class MovieCard extends PureComponent {
-
   _renderPosterImg(poster, title) {
     return (
       <img src={poster} alt={title + ` poster`} width="218" height="327" />
@@ -66,9 +71,11 @@ class MovieCard extends PureComponent {
             <div className="movie-card__poster movie-card__poster--big">
               {this._renderPosterImg(poster, title)}
             </div>
-            <MovieTabs
+            <MovieTabsWrapper
               film={film}
               reviews={reviews}
+              allTabs={Object.values(MovieTab)}
+              defaultActiveItem={MovieTab.OVERVIEW}
             />
           </div>
         </div>

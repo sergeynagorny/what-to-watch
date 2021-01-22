@@ -11,11 +11,15 @@ import {MovieCardType} from "../../const.js";
 import filmDetails from "../../mocks/film-details.js";
 import filmReviews from "../../mocks/film-reviews.js";
 
+import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
+
+const CatalogWrapped = withActiveItem(Catalog);
+
+
 const showMoreButtonClickHandler = () => { };
 
 class App extends PureComponent {
   render() {
-
     const {
       filmsShownCount,
       filmsByGenre,
@@ -35,7 +39,7 @@ class App extends PureComponent {
               film={filmDetails}
               onShowMoreButtonClick={showMoreButtonClickHandler}
             />
-            <Catalog
+            <CatalogWrapped
               films={filmsByGenre}
               count={filmsShownCount}
               allGenres={allGenres}
@@ -52,7 +56,7 @@ class App extends PureComponent {
               reviews={filmReviews}
               onShowMoreButtonClick={showMoreButtonClickHandler}
             />
-            <Catalog
+            <CatalogWrapped
               films={filmsByGenre}
               count={filmsShownCount}
               allGenres={allGenres}

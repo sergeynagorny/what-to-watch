@@ -14,20 +14,6 @@ const withActivePlayer = (Component) => {
       this._videoRef = createRef();
     }
 
-    render() {
-      return <Component
-        {...this.props}
-        renderPlayer={() => {
-          return (
-            <VideoPlayer
-              {...this.props}
-              ref={this._videoRef}
-            />
-          );
-        }}
-      />;
-    }
-
     componentDidUpdate() {
       const video = this._videoRef.current;
 
@@ -38,6 +24,22 @@ const withActivePlayer = (Component) => {
       } else {
         video.load();
       }
+    }
+
+    render() {
+      return (
+        <Component
+          {...this.props}
+          renderPlayer={() => {
+            return (
+              <VideoPlayer
+                {...this.props}
+                ref={this._videoRef}
+              />
+            );
+          }}
+        />
+      );
     }
   }
 

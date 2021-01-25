@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+import VideoPlayer from "../video-player/video-player";
 
 const CatalogCard = (props) => {
-  const {film, onCatalogCardMouseEnter, onCatalogCardMouseLeave, renderPlayer} = props;
+  const {film, onCatalogCardMouseEnter, onCatalogCardMouseLeave, isPlaying} = props;
   const {id, title} = film;
 
   return (
@@ -14,7 +15,10 @@ const CatalogCard = (props) => {
         onCatalogCardMouseLeave();
       }}>
       <div className="small-movie-card__image">
-        {renderPlayer()}
+        <VideoPlayer
+          film={film}
+          isPlaying={isPlaying}
+        />
       </div>
       <h3 className="small-movie-card__title">
         <a className="small-movie-card__link" href="movie-page.html">{title}</a>
@@ -30,7 +34,6 @@ CatalogCard.propTypes = {
   }).isRequired,
   onCatalogCardMouseLeave: PropTypes.func.isRequired,
   onCatalogCardMouseEnter: PropTypes.func.isRequired,
-  renderPlayer: PropTypes.func.isRequired,
 };
 
 export default CatalogCard;

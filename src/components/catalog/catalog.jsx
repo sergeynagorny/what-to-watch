@@ -5,13 +5,7 @@ import CatalogList from "../catalog-list/catalog-list.jsx";
 import AppFooter from "../app-footer/app-footer.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
 
-import withVideoPlayer from "../../hocs/with-video-player/with-video-player.js";
-import withHover from "../../hocs/with-hover/with-hover.js";
-import CatalogCard from "../catalog-card/catalog-card.jsx";
-const CatalogCardWrapped = withHover(withVideoPlayer(CatalogCard));
-
 const CatalogGenresWrapped = withActiveItem(CatalogGenres);
-const CatalogListWrapped = withActiveItem(CatalogList);
 
 const _renderCatalogButton = (onCatalogButtonClick) => {
   return (
@@ -51,20 +45,7 @@ const Catalog = (props) => {
           onCatalogGenresButtonClick={onCatalogGenresButtonClick}
         />
 
-        {/* <div className="catalog__movies-list">
-
-          {films.map((film) =>
-            <CatalogCardWrapped
-              key={film.id + film.title}
-              film={film}
-              itemClickHandler={itemClickHandler}
-              isPlaying={film.id === activeItem}
-            />
-          )}
-
-        </div> */}
-
-        <CatalogListWrapped
+        <CatalogList
           films={filmsShown}
           itemClickHandler={() => { }}
           defaultActiveItem={-1}

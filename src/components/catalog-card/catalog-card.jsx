@@ -1,10 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import VideoPlayer from "../video-player/video-player";
+
 
 const CatalogCard = (props) => {
-  const {film, onCatalogCardMouseEnter, onCatalogCardMouseLeave, isPlaying} = props;
-  const {id, title} = film;
+  const {id, title, onCatalogCardMouseEnter, onCatalogCardMouseLeave, children} = props;
 
   return (
     <article className="small-movie-card catalog__movies-card"
@@ -15,10 +14,7 @@ const CatalogCard = (props) => {
         onCatalogCardMouseLeave();
       }}>
       <div className="small-movie-card__image">
-        <VideoPlayer
-          film={film}
-          isPlaying={isPlaying}
-        />
+        {children}
       </div>
       <h3 className="small-movie-card__title">
         <a className="small-movie-card__link" href="movie-page.html">{title}</a>
@@ -28,12 +24,11 @@ const CatalogCard = (props) => {
 };
 
 CatalogCard.propTypes = {
-  film: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-  }).isRequired,
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
   onCatalogCardMouseLeave: PropTypes.func.isRequired,
   onCatalogCardMouseEnter: PropTypes.func.isRequired,
+  children: PropTypes.element.isRequired,
 };
 
 export default CatalogCard;

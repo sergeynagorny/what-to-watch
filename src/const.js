@@ -4,9 +4,19 @@ export const MovieTab = {
   REVIEWS: `Reviews`,
 };
 
+export const CatalogType = {
+  LIKE_THIS: `like-this`,
+  DEFAULT: `default`
+};
+
 export const MovieCardType = {
   FULL: `full`,
   PREVIEW: `preview`,
+};
+
+export const AppHeaderType = {
+  USER_PAGE: `user-page`,
+  MOVIE_CARD: `movie-card`,
 };
 
 export const TabsDetailsItemName = {
@@ -16,3 +26,15 @@ export const TabsDetailsItemName = {
   GENRE: `Genre`,
   RELEASED: `Released`,
 };
+
+export const AppRoute = {
+  LOGIN: `/login`,
+  MY_LIST: `/my-list`,
+  MOVIE: `/movie`,
+  PLAY: `/play`,
+  ADD_REVIEW: `/add-review`,
+  ROOT: `/`,
+  ID: `/:id`,
+};
+
+

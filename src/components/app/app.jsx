@@ -1,124 +1,165 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
 
-import Catalog from "../catalog/catalog.jsx";
-import Player from "../player/player.jsx";
-import MovieCard from "../movie-card/movie-card";
+import {AppRoute} from "../../const.js";
+import {history as browserHistory} from "../../history";
 
-import {ActionCreator} from "../../reducer.js";
-import {MovieCardType} from "../../const.js";
-import filmDetails from "../../mocks/film-details.js";
-import filmReviews from "../../mocks/film-reviews.js";
+import {Operation as UserOperation} from "../../reducer/user/user";
+import {Operation as DataOperation} from "../../reducer/data/data";
+import {ActionCreator as DataActionCreator} from "../../reducer/data/data";
+import {getFilms, getPromoId, getActiveFilm, getFavoriteFilms} from '../../reducer/data/selectors';
 
-import withShowMoreButton from "../../hocs/with-show-more-button/with-show-more-button.js";
-import withMoviePlayer from "../../hocs/with-movie-player/with-movie-player";
-const PlayerWrapped = withMoviePlayer(Player);
+import MainScreen from "../../components/main-screen/main-screen";
+import MovieScreen from "../movie-screen/movie-screen";
+import AuthScreen from "../auth-screen/auth-screen";
+import Player from "../player/player";
+import MyList from "../my-list/my-list";
+import PrivateRoute from "../private-route/private-route";
+import AddReviewScreen from "../add-review-screen/add-review-screen.jsx";
 
-const CatalogWrapped = withShowMoreButton(Catalog);
 
-const showMoreButtonClickHandler = () => { };
+const App = (props) => {
+  const {
+    films,
+    promoId,
+    activeFilm,
+    favoriteFilms,
+    login,
+    loadFavoriteFilms,
+    setActiveFilm,
+  } = props;
 
-class App extends PureComponent {
-  render() {
-    const {
-      filmsShownCount,
-      filmsByGenre,
-      allGenres,
-      activeGenre,
-      onCatalogButtonClick,
-      onCatalogGenresButtonClick,
-    } = this.props;
 
-    return (
-      <BrowserRouter>
-        <Switch>
+  return (
+    <BrowserRouter history={browserHistory}>
+      <Switch>
 
-          <Route exact path="/">
-            <MovieCard
-              type={MovieCardType.PREVIEW}
-              film={filmDetails}
-              onShowMoreButtonClick={showMoreButtonClickHandler}
+        <Route
+          exact path={AppRoute.LOGIN}
+          render={(props) =>
+            <AuthScreen
+              {...props}
+              onSubmit={login}
             />
-            <CatalogWrapped
-              films={filmsByGenre}
-              count={filmsShownCount}
-              allGenres={allGenres}
-              activeGenre={activeGenre}
-              onCatalogButtonClick={onCatalogButtonClick}
-              onCatalogGenresButtonClick={onCatalogGenresButtonClick}
+          }
+        />
+
+        <Route
+          exact path={AppRoute.ROOT}
+          render={({history}) => {
+            setActiveFilm(films, promoId);
+
+            return (
+              <MainScreen
+                history={history}
+              />
+            );
+          }
+          }
+        />
+
+        <Route
+          path={AppRoute.MOVIE + AppRoute.ID + AppRoute.PLAY}
+          render={({match, history}) => {
+            setActiveFilm(films, match.params.id);
+
+            return (
+              <Player
+                film={activeFilm}
+                onExitButtonClick={() => {
+                  history.goBack();
+                }}
+              />
+            );
+          }}
+        />
+
+        <PrivateRoute
+          exact={false}
+          path={AppRoute.MOVIE + AppRoute.ID + AppRoute.ADD_REVIEW}
+          render={({match, history}) => {
+            setActiveFilm(films, match.params.id);
+
+            return (
+              <AddReviewScreen
+                history={history}
+              />
+            );
+          }
+          }
+        />
+
+        <Route
+          path={AppRoute.MOVIE + AppRoute.ID}
+          render={({match, history}) => {
+            setActiveFilm(films, match.params.id);
+
+            return (
+              <MovieScreen
+                history={history}
+              />
+            );
+          }}
+        />
+
+        <PrivateRoute
+          path={AppRoute.MY_LIST}
+          exact={true}
+          render={() =>
+            <MyList
+              films={favoriteFilms}
+              isLoading={favoriteFilms}
+              dispatch={() => {
+                loadFavoriteFilms();
+              }}
             />
-          </Route>
+          }
+        />
 
-          <Route exact path="/movie-page">
-            <MovieCard
-              type={MovieCardType.FULL}
-              film={filmDetails}
-              reviews={filmReviews}
-              onShowMoreButtonClick={showMoreButtonClickHandler}
-            />
-            <CatalogWrapped
-              films={filmsByGenre}
-              count={filmsShownCount}
-              allGenres={allGenres}
-              activeGenre={activeGenre}
-              onCatalogButtonClick={onCatalogButtonClick}
-              onCatalogGenresButtonClick={onCatalogGenresButtonClick}
-            />
-          </Route>
+        <Route
+          render={() =>
+            <h1>404</h1>
+          }
+        />
 
-          <Route exact path="/movie-page/details">
-
-          </Route>
-
-          <Route exact path="/movie-page/reviews">
-
-          </Route>
-
-          <Route exact path="/play">
-            <PlayerWrapped
-              src={filmDetails.src}
-              title={filmDetails.title}
-              poster={filmDetails.background.image}
-            />
-          </Route>
-
-        </Switch>
-      </BrowserRouter>
-    );
-  }
-}
+      </Switch>
+    </BrowserRouter>
+  );
+};
 
 App.propTypes = {
   films: PropTypes.array.isRequired,
-  filmsShownCount: PropTypes.number.isRequired,
-  filmsByGenre: PropTypes.array.isRequired,
-  allGenres: PropTypes.array.isRequired,
-  activeGenre: PropTypes.string.isRequired,
-  onCatalogButtonClick: PropTypes.func.isRequired,
-  onCatalogGenresButtonClick: PropTypes.func.isRequired,
+  promoId: PropTypes.number.isRequired,
+  activeFilm: PropTypes.object,
+  favoriteFilms: PropTypes.array,
+
+  login: PropTypes.func.isRequired,
+  setActiveFilm: PropTypes.func.isRequired,
+  loadFavoriteFilms: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  films: state.films,
-  filmsByGenre: state.filmsByGenre,
-  filmsShownCount: state.filmsShownCount,
-  allGenres: state.allGenres,
-  activeGenre: state.activeGenre,
+  films: getFilms(state),
+  promoId: getPromoId(state),
+  activeFilm: getActiveFilm(state),
+  favoriteFilms: getFavoriteFilms(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onCatalogButtonClick: () => {
-    dispatch(ActionCreator.addFilmsShownCount());
+  setActiveFilm: (films, id) => {
+    dispatch(DataActionCreator.setActiveFilm(films, id));
   },
-  onCatalogGenresButtonClick: (genre) => {
-    dispatch(ActionCreator.getFilmsByGenre(genre));
-    dispatch(ActionCreator.setGenre(genre));
-    dispatch(ActionCreator.resetFilmsShownCount());
-  }
+  loadFavoriteFilms: () => {
+    dispatch(DataOperation.loadFavoriteFilms());
+  },
+  login: (authData, callback) => {
+    dispatch(UserOperation.login(authData, callback));
+    dispatch(DataOperation.loadUserFilms());
+  },
 });
 
-export {App};
-
 export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+export {App};

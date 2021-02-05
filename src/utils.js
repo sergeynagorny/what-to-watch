@@ -16,3 +16,10 @@ export const convertMinutesToDuration = (n) => {
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
+
+export const smoothScrollToTop = () => {
+  window.scroll({
+    top: 0,
+    left: 0,
+  });
+};

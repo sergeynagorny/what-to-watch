@@ -20,15 +20,16 @@ const withMoviePlayer = (Component) => {
     }
 
     componentDidMount() {
-      const {src, poster} = this.props;
+      const {film} = this.props;
+      const {src: {movie}, background: {image}} = film;
       const video = this._videoRef.current;
 
-      video.src = src;
-      video.poster = poster;
-      // video.preload = `none`;
+      video.src = movie;
+      video.poster = image;
 
       video.oncanplaythrough = () => this.setState({
-        isLoading: false
+        isLoading: false,
+        isPlaying: true
       });
 
       video.onplay = () => this.setState({
@@ -113,8 +114,7 @@ const withMoviePlayer = (Component) => {
   }
 
   WithMoviePlayer.propTypes = {
-    src: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired,
+    film: PropTypes.object.isRequired,
   };
 
   return WithMoviePlayer;

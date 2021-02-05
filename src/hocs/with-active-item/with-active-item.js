@@ -10,7 +10,7 @@ const withActiveItem = (Component) => {
       this.itemClickHandler = this.itemClickHandler.bind(this);
 
       this.state = {
-        activeItem: this.props.defaultActiveItem,
+        activeItem: this.props.activeItem,
       };
     }
 
@@ -32,8 +32,12 @@ const withActiveItem = (Component) => {
     }
   }
 
+  WithActiveItem.defaultProps = {
+    activeItem: -1,
+  };
+
   WithActiveItem.propTypes = {
-    defaultActiveItem: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    activeItem: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   };
 
   return WithActiveItem;

@@ -14,7 +14,7 @@ const TabsDetails = (props) => {
       <div className="movie-card__text-col">
 
         <TabsDetailsItem name={TabsDetailsItemName.DIRECTOR}>
-          {director.map((item) => item).join(`, \n`)}
+          {director}
         </TabsDetailsItem>
 
         <TabsDetailsItem name={TabsDetailsItemName.STARRING}>
@@ -30,11 +30,11 @@ const TabsDetails = (props) => {
         </TabsDetailsItem>
 
         <TabsDetailsItem name={TabsDetailsItemName.GENRE}>
-          {genre.map((item) => item).join(`, `)}
+          {genre}
         </TabsDetailsItem>
 
         <TabsDetailsItem name={TabsDetailsItemName.RELEASED}>
-          {String(released.getFullYear())}
+          {String(released)}
         </TabsDetailsItem>
 
       </div>
@@ -44,11 +44,11 @@ const TabsDetails = (props) => {
 
 TabsDetails.propTypes = {
   film: PropTypes.shape({
-    director: PropTypes.array.isRequired,
+    director: PropTypes.string.isRequired,
     starring: PropTypes.array.isRequired,
     runtime: PropTypes.number.isRequired,
-    genre: PropTypes.array.isRequired,
-    released: PropTypes.instanceOf(Date).isRequired,
+    genre: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
   }).isRequired,
 };
 

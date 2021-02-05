@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import withLoading from "../../../../hocs/with-loading/with-loading";
 
 
 const getSplitReviews = (array) => {
@@ -54,4 +55,6 @@ TabsReviews.propTypes = {
   })).isRequired,
 };
 
-export default TabsReviews;
+
+export default withLoading(TabsReviews);
+

@@ -23,8 +23,8 @@ const TabsOverview = (props) => {
         </p>
       </div>
       <div className="movie-card__text">
-        {description.map((item, index) => (<p key={`dscr-${id}-${index}`}>{item}</p>))}
-        <p className="movie-card__director"><strong>Director: {getNamesList(director)}</strong></p>
+        {description}
+        <p className="movie-card__director"><strong>Director: {director}</strong></p>
         <p className="movie-card__starring"><strong>Starring: {getNamesList(starring)}</strong></p>
       </div>
     </Fragment>
@@ -38,8 +38,8 @@ TabsOverview.propTypes = {
       score: PropTypes.number.isRequired,
       count: PropTypes.number.isRequired,
     }).isRequired,
-    description: PropTypes.array.isRequired,
-    director: PropTypes.array.isRequired,
+    description: PropTypes.string.isRequired,
+    director: PropTypes.string.isRequired,
     starring: PropTypes.array.isRequired,
   }).isRequired,
 };

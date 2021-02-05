@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import withMoviePlayer from "../../hocs/with-movie-player/with-movie-player";
 
 
 const PlayerIcon = {
@@ -11,19 +12,19 @@ const convertSecondToDuration = (seconds) => {
   const duration = new Date(seconds * 1000);
 
   if (duration.getUTCHours() === 0) {
-    return duration.toISOString().substr(15, 4);
+    return duration.toISOString().substr(14, 5);
   } else {
     return duration.toISOString().substr(12, 7);
   }
 };
 
 const convertProgressToBar = (progress, duration) => {
-  return Math.floor((progress / duration) * 100) || 0;
+  return Number(((progress / duration) * 100).toFixed(2)) || 0;
 };
 
 const Player = (props) => {
   const {
-    title,
+    film,
     duration,
     progress,
     isLoading,
@@ -31,14 +32,17 @@ const Player = (props) => {
     children,
     onPlayButtonClick,
     onFullScreenButtonClick,
+    onExitButtonClick,
   } = props;
+
+  const {title} = film;
 
   const progressBar = convertProgressToBar(progress, duration);
 
   return (
     <div className="player">
       {children}
-      <button type="button" className="player__exit">Exit</button>
+      <button type="button" onClick={onExitButtonClick} className="player__exit">Exit</button>
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">
@@ -79,7 +83,7 @@ const Player = (props) => {
 };
 
 Player.propTypes = {
-  title: PropTypes.string.isRequired,
+  film: PropTypes.object.isRequired,
   duration: PropTypes.number.isRequired,
   progress: PropTypes.number.isRequired,
   isLoading: PropTypes.bool.isRequired,
@@ -87,6 +91,7 @@ Player.propTypes = {
   children: PropTypes.element.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
   onFullScreenButtonClick: PropTypes.func.isRequired,
+  onExitButtonClick: PropTypes.func.isRequired,
 };
 
-export default Player;
+export default withMoviePlayer(Player);

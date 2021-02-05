@@ -7,14 +7,14 @@ const ACTIVE_ITEM_CLASS = `catalog__genres-item--active`;
 const CatalogGenres = (props) => {
   const {
     allGenres,
-    activeItem,
+    activeGenre,
     itemClickHandler
   } = props;
 
   return (
     <ul className="catalog__genres-list">
       {allGenres.map((genre) => {
-        const activeClass = genre === activeItem ? `${ACTIVE_ITEM_CLASS}` : ``;
+        const activeClass = genre === activeGenre ? `${ACTIVE_ITEM_CLASS}` : ``;
 
         return (
           <li key={genre} className={`catalog__genres-item ${activeClass}`}>
@@ -35,8 +35,8 @@ const CatalogGenres = (props) => {
 
 CatalogGenres.propTypes = {
   allGenres: PropTypes.array.isRequired,
-  activeItem: PropTypes.string.isRequired,
-  itemClickHandler: PropTypes.func.isRequired,
+  activeGenre: PropTypes.string.isRequired,
+  itemClickHandler: PropTypes.func,
 };
 
 export default CatalogGenres;
